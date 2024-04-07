@@ -6,7 +6,7 @@ data class StoreRequest(
     @field:NotBlank
     val name: String,
 
-    @field:NotBlank
+    @field:NotBlank(message = "Pole wymagane")
     val producer: String,
 
     @field:NotBlank
