@@ -1,4 +1,4 @@
-#Endpoints
+# Endpoints
 
 ```http
   GET /api/yerba
