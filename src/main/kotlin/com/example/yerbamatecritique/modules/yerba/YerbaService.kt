@@ -1,6 +1,8 @@
 package com.example.yerbamatecritique.modules.yerba
 
 import com.example.yerbamatecritique.exceptions.YerbaNotFound
+import com.example.yerbamatecritique.modules.yerba.requests.StoreRequest
+import com.example.yerbamatecritique.modules.yerba.requests.UpdateRequest
 import org.springframework.stereotype.Service
 import kotlin.jvm.optionals.getOrNull
 
@@ -18,32 +20,23 @@ class YerbaService(val db: YerbaRepository) {
         return yerba
     }
 
-    fun add(yerba: Yerba) {
-        db.save(yerba)
+    fun add(data: StoreRequest) {
+        db.save(Yerba(null, data.name, data.producer, data.flavour))
     }
 
-    fun edit(yerba: Yerba) {
-        if (!this.existsById(yerba.id)) {
+    fun edit(id: String, data: UpdateRequest) {
+        if (db.existsById(id)) {
             throw YerbaNotFound("Yerba not found.")
         }
 
-        db.save(yerba)
+        db.save(Yerba(id, data.name, data.producer, data.flavour))
     }
 
     fun deleteById(id: String) {
-        if (!this.existsById(id)) {
+        if (!db.existsById(id)) {
             throw YerbaNotFound("Yerba not found.")
         }
 
         db.deleteById(id)
     }
-
-    fun existsById(id: String?): Boolean {
-        if (id !is String || id.isEmpty()) {
-            return false
-        }
-
-        return db.existsById(id)
-    }
-
 }
