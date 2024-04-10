@@ -17,14 +17,14 @@ class YerbaController(val service: YerbaService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun store(@Valid @RequestBody request: StoreRequest) {
-        service.add(request)
+    fun store(@Valid @RequestBody body: StoreRequest) {
+        service.add(body)
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun update(@PathVariable id: String, @Valid @RequestBody request: UpdateRequest) {
-        service.edit(id, request)
+    fun update(@PathVariable id: String, @Valid @RequestBody body: UpdateRequest) {
+        service.edit(id, body)
     }
 
     @DeleteMapping("/delete/{id}")
