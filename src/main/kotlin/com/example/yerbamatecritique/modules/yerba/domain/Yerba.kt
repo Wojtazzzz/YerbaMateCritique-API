@@ -1,4 +1,4 @@
-package com.example.yerbamatecritique.modules.yerba
+package com.example.yerbamatecritique.modules.yerba.domain
 
 import jakarta.validation.constraints.NotBlank
 import org.springframework.data.annotation.Id
