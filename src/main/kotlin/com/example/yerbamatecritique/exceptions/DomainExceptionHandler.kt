@@ -11,10 +11,9 @@ import org.springframework.web.server.ResponseStatusException
 class DomainExceptionHandler {
     @ExceptionHandler(YerbaNotFound::class)
     fun handleException(ex: Exception?, request: WebRequest?): ErrorResponseException {
-        if (ex is YerbaNotFound) {
-            return ResponseStatusException(HttpStatus.NOT_FOUND, "Yerba not found.")
+        return when (ex) {
+            is YerbaNotFound -> ResponseStatusException(HttpStatus.NOT_FOUND, "Yerba not found.")
+            else -> ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
         }
-
-        return ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }
